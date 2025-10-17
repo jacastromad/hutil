@@ -48,13 +48,13 @@ findInds :: (Eq a, U.Unbox a) => a -> Grid a -> [(Int, Int)]
 findInds e g = [ (i `mod` width g, i `div` width g)
                | i <- U.toList (U.findIndices (== e) (buf g))]
 
--- inbound right, left, down and up positions
+-- inbound left, right, up and down positions
 neighbors4 :: Grid a -> (Int, Int) -> [(Int, Int)]
-neighbors4 g (x, y) = filter (inBounds g) [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
+neighbors4 g (x, y) = filter (inBounds g) [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
 
 -- inbound surrounding positions
 neighbors8 :: Grid a -> (Int, Int) -> [(Int, Int)]
 neighbors8 g (x, y) = filter (inBounds g) ps
-  where ps = [(x+dx, y+dy) | dx <- [-1, 0, 1], dy <- [-1, 0, 1], (dx, dy) /= (0, 0)]
+  where ps = [(x+dx, y+dy) | dy <- [-1, 0, 1], dx <- [-1, 0, 1], (dx, dy) /= (0, 0)]
 
 
