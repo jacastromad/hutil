@@ -8,6 +8,7 @@ import Data.List (foldl')
 
 -- min-priority queue on top of Map
 newtype MinPQ p a = MinPQ (M.Map p [a])  -- smallest p first
+  deriving (Show, Eq)
 
 instance Functor (MinPQ p) where
   fmap f (MinPQ m) = MinPQ (fmap (map f) m)
